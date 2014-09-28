@@ -1,0 +1,28 @@
+
+<workflow-app name="gcloud-backup" xmlns="uri:oozie:workflow:0.4">
+    <start to="snapshot-disk-backup"/>
+    <action name="snapshot-disk-backup">
+        <shell xmlns="uri:oozie:shell-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>sh </exec>
+              <argument>/user/hdfs/scripts/backup/backup.sh</argument>
+            <file>/user/hdfs/scripts/backup/backup.sh#backup.sh</file>
+        </shell>
+        <ok to="end"/>
+        <error to="killemail"/>
+    </action>
+    <action name="killemail">
+        <email xmlns="uri:oozie:email-action:0.1">
+            <to>ashishbindal4@gmail.com</to>
+            <subject>hello</subject>
+            <body>dasfads</body>
+        </email>
+        <ok to="kill"/>
+        <error to="kill"/>
+    </action>
+    <kill name="kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>
