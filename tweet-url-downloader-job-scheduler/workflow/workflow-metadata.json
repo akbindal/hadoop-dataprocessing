@@ -1,0 +1,1 @@
+{"attributes": {"deployment_dir": "/user/hue/oozie/workspaces/_hdfs_-oozie-27-1411156283.38", "description": ""}, "nodes": {"download-urls": {"attributes": {"jar_path": "/user/hdfs/scripts/data_collection/url_downloader.jar"}}}, "version": "0.0.1"}
